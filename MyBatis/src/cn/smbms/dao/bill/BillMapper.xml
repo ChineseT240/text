@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.smbms.dao.bill.BillMapper">
+	<select id="getBillLsit" resultType="Bill" parameterType="Bill">
+		SELECT * FROM smbms_bill WHERE productName LIKE CONCAT('%',#{providerName},'%') AND
+		providerId=#{providerId} AND isPayment=#{isPayment}
+	</select>
+	
+	<delete id="DelectId"  parameterType="int" >
+	DELETE  FROM smbms_bill WHERE id=#{id}
+	</delete>
+	
+	<update id="Updata" parameterType="Bill">
+	UPDATE  smbms_bill SET providerId=#{providerId} WHERE id=#{id}
+	</update>
+	
+	<insert id="Add">
+	INSERT INTO smbms_bill(billCode) VALUES(#{billCode})
+	</insert>
+</mapper>

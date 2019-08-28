@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.smbms.dao.user.UserMapper">
+<!-- 当数据库中的字段信息与对象属性不一致时需要通过resultMap来映射 -->
+<resultMap type="User" id="UserList">
+<result property="UserRoleName" column="releName"/>
+</resultMap>
+<!-- 查询用户列表(参数,对象入参) -->
+<select id="getUserList" resultMap="UserList" parameterType="User">
+	SELECT u.*,r.roleName FROM smbms_user u,smbms_role r WHERE userName
+	LIKE CONCAT('%',#{userName},'%') AND u.userRole=#{userRole} AND
+	u.userRole=r.id
+</select>
+
+<insert id="add" parameterType="User"> insert into smbms_user
+	(userCode,userName,userPassword,gender,
+	birthday,phone,address,userRole,createdBy,creationDate) values
+	(#{userCode},#{userName},#{userPassword},#{gender},
+	#{birthday},#{phone},#{address},#{userRole},
+	#{createdBy},#{creationDate})
+</insert>
+
+<update id="Update" parameterType="User">
+UPDATE smbms_user SET userPassword=#{userPassword} WHERE id=#{id}
+</update>
+
+<select id="SelectId" resultType="User">
+SELECT * FROM smbms_user WHERE userRole=#{userRole}
+</select>
+
+<delete id="DeleteuserRole" >
+DELETE FROM smbms_user WHERE userRole=#{userRole}
+</delete>
+</mapper>

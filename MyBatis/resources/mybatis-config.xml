@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- 通过这个配置文件完成mybatis与数据库的连接 -->
+<configuration>
+
+<!-- 引入database文件 -->
+<properties resource="database.properties"></properties>
+<!-- 配置mybatis的log4j -->
+<settings>
+	<setting name="logImpl" value="LOG4J"/>
+</settings>
+<typeAliases>
+	<!-- 这里是配置单个实体类  
+	<typeAlias alias="Provider" type="com.pojo.Provider"/> -->
+	
+	<!-- 配置整个实体包:如果配置了整个包，在使用的时候头字母小写   -->
+	<package name="cn.smbms.pojo"/>
+</typeAliases>
+
+</configuration>
+
